@@ -1,0 +1,9 @@
+### Hello root
+GET http://localhost:8080/
+Accept: application/json
+
+### Hello {name}
+GET http://localhost:8080/Helly
+Accept: application/json
+
+
