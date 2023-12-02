@@ -21,6 +21,25 @@
     docker start CONTAINER_ID
     ```
 
+---
+## gradle::bootBuildImage
+- setup **gradle::bootBuildImage**
+    ```groovy
+    tasks.named("bootBuildImage") {
+        imageName.set("xander11m/${project.name}:${version}")
+        tags.add("xander11m/${project.name}:${version}")
+    }
+    ```
+
+- terminal scrypt for **gradle::bootBuildImage**
+    ```shell
+  gradle clean bootBuildImage
+  docker images
+  dive xander11m/test-docker-spring:0.0.1-SNAPSHOT
+  docker image rm --force IMAGE xander11m/test-docker-spring:0.0.1-SNAPSHOT
+    ```
+  
+---
 ## docker-compose.yml and DB dependency
 ### !!! please note
 - **mongodb-container** - a container name of mongodb in the database URL 
@@ -31,6 +50,4 @@
         mongodb:
           uri: "mongodb://mongodb-container/docker-db"
     ```
-docker create -p 27017:27017 -t mongodb-container mongo
-
-docker run --name mongodb-container -p 27017:27017 mongo
+  
