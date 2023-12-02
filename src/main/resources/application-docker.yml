@@ -4,6 +4,4 @@ spring:
     name: hello-application
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: hello-application-database
+      uri: "mongodb://mongodb-container/docker-db"

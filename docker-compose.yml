@@ -1,0 +1,22 @@
+version: '3'
+services:
+  ## Mongo Docker Compose Config
+  mongo:
+    container_name: mongodb-container
+    image: mongo:7.0.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo-data:/data/db
+
+  ## Hello-Application Docker Compose Config
+  product-service:
+    build: .
+    container_name: hello-application
+    image: xander11m/hello-application:latest
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
