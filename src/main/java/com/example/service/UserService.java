@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.dto.UserDto;
 import com.example.entity.UserEntity;
 import com.example.repository.UserRepository;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,8 @@ public class UserService {
 
     public List<UserDto> getUsers() {
         List<UserEntity> allUsers = repository.findAll();
-        return allUsers.stream().map(this::toDto).toList();
+        List<UserDto> dtos = Lists.transform(allUsers, this::toDto);
+        return dtos;
     }
 
     public UserDto saveUser(String userName) {

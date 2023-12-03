@@ -25,14 +25,23 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.google.guava:guava:31.0.1-jre'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.springframework.boot:spring-boot-gradle-plugin:3.2.0'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+
+tasks.named("bootBuildImage") {
+    imageName.set("xander11m/${project.name}:${version}")
+    tags.add("xander11m/${project.name}:${version}")
 }
