@@ -19,16 +19,26 @@
     docker create -p 8080:8080 xander11m/myhelloapp  
     # start/stop/pause/unpause/restart
     docker start CONTAINER_ID
+    
+    #show some info about image
+    docker history 239 # (start of image_id)
     ```
 
 ---
 ## gradle::bootBuildImage
 - setup **gradle::bootBuildImage**
     ```groovy
-    tasks.named("bootBuildImage") {
-        imageName.set("xander11m/${project.name}:${version}")
-        tags.add("xander11m/${project.name}:${version}")
-    }
+    bootBuildImage {
+      imageName = "xander11m/${project.name}:${version}"
+      publish = true
+      docker {
+          publishRegistry {
+              url      = project.property('testDockerSpringContainerRepoUrl')
+              username = project.property('testDockerSpringContainerRepoUser')
+              password = project.property('testDockerSpringContainerRepoPassword')
+          }
+      }
+  }
     ```
 
 - terminal scrypt for **gradle::bootBuildImage**
@@ -50,4 +60,9 @@
         mongodb:
           uri: "mongodb://mongodb-container/docker-db"
     ```
-  
+- terminal scrypt for **docker-compose**
+    ```shell
+  docker-compose build
+  docker-compose up
+  docker-compose down
+    ```
