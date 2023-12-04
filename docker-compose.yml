@@ -10,10 +10,10 @@ services:
       - ./data/mongo-data:/data/db
 
   ## Hello-Application Docker Compose Config
-  product-service:
-    build: .
+  hello-application:
+#    build: .
     container_name: hello-application
-    image: xander11m/hello-application:latest
+    image: xander11m/test-docker-spring:0.0.1-SNAPSHOT
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     ports:
